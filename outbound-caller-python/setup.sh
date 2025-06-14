@@ -14,6 +14,7 @@ curl -L ${DOWNLOAD_URL} -o lk
 
 chmod +x lk
 
-sudo mv lk /usr/local/bin/
+mkdir -p bin
+mv lk bin/
 
-echo "LiveKit CLI installed successfully to /usr/local/bin/lk"
+echo "LiveKit CLI installed successfully to ./bin/lk"

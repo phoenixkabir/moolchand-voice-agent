@@ -30,11 +30,15 @@ if st.button("Dispatch Call"):
             metadata,
         ]
 
+        # Set the PATH for the subprocess to include the local bin directory
+        env = os.environ.copy()
+        env["PATH"] = os.path.abspath(os.path.join(os.getcwd(), "bin")) + os.pathsep + env["PATH"]
+
         st.info(f"Dispatching call to {phone_number}...")
 
         try:
             # Run the command and capture output
-            result = subprocess.run(command, capture_output=True, text=True, check=True)
+            result = subprocess.run(command, capture_output=True, text=True, check=True, env=env)
             st.success(f"Call dispatched successfully! \nOutput:\n{result.stdout}")
             if result.stderr:
                 st.warning(f"Warnings/Errors from dispatch command:\n{result.stderr}")
